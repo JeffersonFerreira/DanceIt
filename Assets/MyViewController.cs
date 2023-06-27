@@ -5,8 +5,7 @@ using UnityEngine.UIElements;
 
 public class MyViewController : ListViewController
 {
-    [CanBeNull]
-    public VisualElement LastPointerDownElement { get; private set; }
+    [CanBeNull] public VisualElement LastPointerDownElement { get; private set; }
 
     private List<RenderTexture> _renderTextures;
     private VisualTreeAsset _listItemTemplate;
@@ -24,11 +23,10 @@ public class MyViewController : ListViewController
 
     protected override void BindItem(VisualElement element, int index)
     {
-        RenderTexture tex = _renderTextures[index];
-
         VisualElement visualElement = element.Q<VisualElement>("texture");
-        visualElement.style.backgroundImage = Background.FromRenderTexture(tex);
+
         visualElement.userData = index;
+        visualElement.style.backgroundImage = Background.FromRenderTexture(_renderTextures[index]);
 
         visualElement.RegisterCallback<PointerDownEvent>(PointerDownCallback);
     }

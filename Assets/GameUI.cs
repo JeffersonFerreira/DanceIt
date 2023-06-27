@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 
 public class GameUI : MonoBehaviour
@@ -56,17 +57,18 @@ public class GameUI : MonoBehaviour
     private void OnEnable()
     {
         _doc = GetComponent<UIDocument>();
+
+        _listView = _doc.rootVisualElement.Q<ListView>("clip-view-list");
+        Assert.IsNotNull(_listView);
+
+        _scroller = _listView.Q<Scroller>(classes: Scroller.ussClassName);
         // Dynamically set "list element items" height to match the whole screen
-        _doc
-            .rootVisualElement.Q<VisualElement>("unity-content-viewport")
+        _listView.Q<VisualElement>("unity-content-viewport")
             .RegisterCallback<GeometryChangedEvent>(evt =>
             {
                 var visualElement = (VisualElement)evt.target;
                 _listView.fixedItemHeight = visualElement.resolvedStyle.height;
             });
-
-        _listView = _doc.rootVisualElement.Q<ListView>("main-list");
-        _scroller = _listView.Q<Scroller>(classes: Scroller.ussClassName);
 
         _viewController = new MyViewController(_renderTextures, _listItemTemplate);
         _listView.SetViewController(_viewController);
@@ -91,13 +93,18 @@ public class GameUI : MonoBehaviour
         if (Mathf.Abs(_lastScrollDelta) < 0.1f)
             return;
 
-        int elIndex = (int)_viewController.LastPointerDownElement.userData;
+        if (_viewController.LastPointerDownElement is { userData: int elIndex })
+        {
+            var dir = _lastScrollDelta > 0 ? 1 : -1;
+            var targetDir = (elIndex + dir) * _listView.fixedItemHeight;
 
-        var dir = _lastScrollDelta > 0 ? 1 : -1;
-        var targetDir = (elIndex + dir) * _listView.fixedItemHeight;
-
-        StopCoroutine("ScrollTo");
-        StartCoroutine("ScrollTo", targetDir);
+            StopCoroutine("ScrollTo");
+            StartCoroutine("ScrollTo", targetDir);
+        }
+        else
+        {
+            Debug.LogError("Fail to process last pointer down");
+        }
     }
 
     IEnumerator ScrollTo(float positionY)

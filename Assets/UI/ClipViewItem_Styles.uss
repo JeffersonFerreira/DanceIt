@@ -1,0 +1,10 @@
+.account-interaction {
+    height: 64px;
+    -unity-background-scale-mode: scale-to-fit;
+    width: 64px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+Label {
+    color: rgb(255, 255, 255);
+}
