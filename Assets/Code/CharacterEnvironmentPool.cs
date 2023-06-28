@@ -10,25 +10,28 @@ public class CharacterEnvironmentPool : MonoBehaviour
     private readonly Queue<CharacterEnvironment> _poolQueue = new();
     private int _creationCount;
 
-    public CharacterEnvironment Request()
+    public CharacterEnvironment TakeOne()
     {
         if (!_poolQueue.TryDequeue(out var charEnv))
             charEnv = MakeOne();
 
-        charEnv.OnRequired();
+        charEnv.OnTaken();
         return charEnv;
     }
 
-    public void Release(CharacterEnvironment charEnv)
+    public void Store(CharacterEnvironment charEnv)
     {
+        charEnv.OnStored();
         _poolQueue.Enqueue(charEnv);
-        charEnv.OnReleased();
     }
 
     private CharacterEnvironment MakeOne()
     {
         // Compute world position for it
         var pos = Vector3.right * _creationCount * _spaceBetween;
-        return Instantiate(_prefab, pos, Quaternion.identity, _spawnPoint);
+        var newInstance = Instantiate(_prefab, pos, Quaternion.identity, _spawnPoint);
+
+        _creationCount++;
+        return newInstance;
     }
 }

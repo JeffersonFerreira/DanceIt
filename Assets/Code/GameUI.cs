@@ -17,6 +17,13 @@ public class GameUI : MonoBehaviour
     private VisualElement _pointerDownElement;
     private MyViewController _viewController;
 
+    private CharacterEnvironmentPool _charPool;
+
+    private void Awake()
+    {
+        _charPool = FindObjectOfType<CharacterEnvironmentPool>();
+    }
+
     // private void Update()
     // {
     //     if (Input.GetKeyDown(KeyCode.T))
@@ -70,7 +77,7 @@ public class GameUI : MonoBehaviour
                 _listView.fixedItemHeight = visualElement.resolvedStyle.height;
             });
 
-        _viewController = new MyViewController(_renderTextures, _listItemTemplate);
+        _viewController = new MyViewController(_listItemTemplate, _charPool);
         _listView.SetViewController(_viewController);
         _listView.RegisterCallback<PointerMoveEvent>(OnPointerMoveCallback);
         _listView.RegisterCallback<PointerUpEvent>(OnPointerUpCallback);

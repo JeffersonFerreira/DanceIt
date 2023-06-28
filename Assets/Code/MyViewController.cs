@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MyViewController : ListViewController
 {
     [CanBeNull] public VisualElement LastPointerDownElement { get; private set; }
 
-    private List<RenderTexture> _renderTextures;
-    private VisualTreeAsset _listItemTemplate;
+    private readonly VisualTreeAsset _listItemTemplate;
+    private readonly CharacterEnvironmentPool _charPool;
+    private readonly List<CharacterEnvironment> _charEnvList = new();
 
-    public MyViewController(List<RenderTexture> renderTextures, VisualTreeAsset template)
+    public MyViewController(VisualTreeAsset template, CharacterEnvironmentPool charPool)
     {
-        _renderTextures = renderTextures;
+        _charPool = charPool;
         _listItemTemplate = template;
     }
 
@@ -25,14 +25,18 @@ public class MyViewController : ListViewController
     {
         VisualElement visualElement = element.Q<VisualElement>("texture");
 
+        var characterEnvironment = _charPool.TakeOne();
+        _charEnvList.Insert(index, characterEnvironment);
+
         visualElement.userData = index;
-        visualElement.style.backgroundImage = Background.FromRenderTexture(_renderTextures[index]);
+        visualElement.style.backgroundImage = Background.FromRenderTexture(characterEnvironment.RenderTexture);
 
         visualElement.RegisterCallback<PointerDownEvent>(PointerDownCallback);
     }
 
     protected override void UnbindItem(VisualElement element, int index)
     {
+        _charPool.Store(_charEnvList[index]);
         element.UnregisterCallback<PointerDownEvent>(PointerDownCallback);
     }
 

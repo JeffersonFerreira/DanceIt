@@ -16,16 +16,16 @@ public class CharacterEnvironment : MonoBehaviour
         _cam.targetTexture = RenderTexture;
 
         // Disable components until required
-        OnReleased();
+        OnStored();
     }
 
-    public void OnRequired()
+    public void OnTaken()
     {
         _cam.enabled = true;
         _cam.gameObject.SetActive(true);
     }
 
-    public void OnReleased()
+    public void OnStored()
     {
         _cam.enabled = false;
         _cam.gameObject.SetActive(false);
