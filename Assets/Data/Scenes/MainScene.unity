@@ -326,4 +326,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listItemTemplate: {fileID: 9197481963319205126, guid: 0191c0e0d6869644994bb5c07a8d076c, type: 3}
+  _autoScrollTime: 0.5
   _repository: {fileID: 11400000, guid: 01befd787ec3a0a40881ccfdee43ceea, type: 2}

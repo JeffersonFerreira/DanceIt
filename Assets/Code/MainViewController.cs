@@ -1,18 +1,15 @@
 ﻿using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
 
-public class MyViewController : ListViewController
+public class MainViewController : ListViewController
 {
-    [CanBeNull] public VisualElement LastPointerDownElement { get; private set; }
-
     private readonly VisualTreeAsset _listItemTemplate;
     private readonly CharacterEnvironmentPool _charPool;
     private readonly List<UserDanceModel> _userDances;
 
-    public MyViewController(VisualTreeAsset template, CharacterEnvironmentPool charPool, List<UserDanceModel> userDances)
+    public MainViewController(VisualTreeAsset template, CharacterEnvironmentPool charPool, List<UserDanceModel> userDances)
     {
         _charPool = charPool;
         _userDances = userDances;
@@ -59,12 +56,8 @@ public class MyViewController : ListViewController
             out PlayableGraph playableGraph
         );
 
-        // Binding info and callback to this element because they are the click target on this current setup
-        textureEl.RegisterCallback<PointerDownEvent>(PointerDownCallback);
-
         // Store relevant information on this element for cleaning later
-        textureEl.userData = new ViewUserData {
-            Index = index,
+        element.userData = new ViewUserData {
             PlayableGraph = playableGraph,
             CharacterEnvironment = charEnv,
             ModelInstance = modelInstance
@@ -73,26 +66,17 @@ public class MyViewController : ListViewController
 
     protected override void UnbindItem(VisualElement element, int index)
     {
-        var textureEl = element.Q<VisualElement>("texture");
-        textureEl.UnregisterCallback<PointerDownEvent>(PointerDownCallback);
+        if (element.userData is not ViewUserData viewData)
+            return;
 
-        if (textureEl.userData is ViewUserData viewData)
-        {
-            viewData.PlayableGraph.Destroy();
-            Object.Destroy(viewData.ModelInstance);
-            _charPool.Store(viewData.CharacterEnvironment);
-        }
-    }
-
-    private void PointerDownCallback(PointerDownEvent evt)
-    {
-        LastPointerDownElement = evt.target as VisualElement;
+        viewData.PlayableGraph.Destroy();
+        Object.Destroy(viewData.ModelInstance);
+        _charPool.Store(viewData.CharacterEnvironment);
     }
 }
 
 public class ViewUserData
 {
-    public int Index;
     public PlayableGraph PlayableGraph;
     public GameObject ModelInstance;
     public CharacterEnvironment CharacterEnvironment;

@@ -27,7 +27,7 @@ public class CharacterEnvironmentPool : MonoBehaviour
 
     private CharacterEnvironment MakeOne()
     {
-        // Compute world position for it
+        // Using "creationCount" to put each item side by side
         var pos = Vector3.right * _creationCount * _spaceBetween;
         var newInstance = Instantiate(_prefab, pos, Quaternion.identity, _spawnPoint);
 

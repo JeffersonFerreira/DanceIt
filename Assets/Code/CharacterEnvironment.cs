@@ -5,14 +5,13 @@ public class CharacterEnvironment : MonoBehaviour
     [SerializeField] private Camera _cam;
     [SerializeField] private Transform _charAnchorPoint;
 
-    public Camera Camera => _cam;
     public Transform CharacterSpawnPoint => _charAnchorPoint;
     public RenderTexture RenderTexture { get; private set; }
 
     private void Awake()
     {
         // Create render tex
-        RenderTexture = new RenderTexture(1024, 1024, 1, RenderTextureFormat.Default);
+        RenderTexture = new RenderTexture(512, 1024, 1, RenderTextureFormat.Default);
         _cam.targetTexture = RenderTexture;
 
         // Disable components until required
