@@ -12,7 +12,7 @@ public class CharacterEnvironment : MonoBehaviour
     private void Awake()
     {
         // Create render tex
-        RenderTexture = new RenderTexture(1024, 1024, 0, RenderTextureFormat.Default);
+        RenderTexture = new RenderTexture(1024, 1024, 1, RenderTextureFormat.Default);
         _cam.targetTexture = RenderTexture;
 
         // Disable components until required

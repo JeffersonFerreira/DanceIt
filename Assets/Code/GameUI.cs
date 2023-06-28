@@ -74,10 +74,10 @@ public class GameUI : MonoBehaviour
         if (Mathf.Abs(_lastScrollDelta) < 0.1f)
             return;
 
-        if (_viewController.LastPointerDownElement is { userData: int elIndex })
+        if (_viewController.LastPointerDownElement is { userData: ViewUserData viewData })
         {
             var dir = _lastScrollDelta > 0 ? 1 : -1;
-            var targetDir = (elIndex + dir) * _listView.fixedItemHeight;
+            var targetDir = (viewData.Index + dir) * _listView.fixedItemHeight;
 
             StopCoroutine("ScrollTo");
             StartCoroutine("ScrollTo", targetDir);
