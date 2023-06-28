@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,8 @@ using UnityEngine.UIElements;
 
 public class GameUI : MonoBehaviour
 {
-    [SerializeField] private List<RenderTexture> _renderTextures;
     [SerializeField] private VisualTreeAsset _listItemTemplate;
+    [SerializeField] private Repository _repository;
 
     private UIDocument _doc;
     private ListView _listView;
@@ -19,47 +20,20 @@ public class GameUI : MonoBehaviour
 
     private CharacterEnvironmentPool _charPool;
 
+    private readonly List<UserDanceModel> _userDances = new();
+
     private void Awake()
     {
         _charPool = FindObjectOfType<CharacterEnvironmentPool>();
     }
 
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.T))
-    //     {
-    //         var container = _listView.Q<VisualElement>("unity-content-container");
-    //         var scroller = _listView.Q<Scroller>(classes: Scroller.ussClassName);
-    //
-    //         // VisualElement visualElement = _listView.contentContainer[0];
-    //         // Debug.Log(visualElement);
-    //
-    //         foreach (var element in container.Children())
-    //         {
-    //             var pos = element.layout.position;
-    //             var hei = _listView.fixedItemHeight;
-    //
-    //             float screenVisibilityFactor;
-    //             if (scroller.value >= pos.y)
-    //             {
-    //                 var diff = scroller.value - pos.y;
-    //                 screenVisibilityFactor = (hei - diff) / hei;
-    //             }
-    //             else
-    //             {
-    //                 var diff = (scroller.value + hei) - pos.y;
-    //                 screenVisibilityFactor = diff / hei;
-    //             }
-    //
-    //             // if (f > 0.5f)
-    //             // {
-    //             //     _listView.ScrollTo(element);
-    //             //     return;
-    //             // }
-    //
-    //         }
-    //     }
-    // }
+    private async void Start()
+    {
+        var dances = await _repository.GetUserDances();
+
+        _userDances.AddRange(dances);
+        _listView.RefreshItems();
+    }
 
     private void OnEnable()
     {
@@ -77,13 +51,13 @@ public class GameUI : MonoBehaviour
                 _listView.fixedItemHeight = visualElement.resolvedStyle.height;
             });
 
-        _viewController = new MyViewController(_listItemTemplate, _charPool);
+        _viewController = new MyViewController(_listItemTemplate, _charPool, _userDances);
         _listView.SetViewController(_viewController);
         _listView.RegisterCallback<PointerMoveEvent>(OnPointerMoveCallback);
         _listView.RegisterCallback<PointerUpEvent>(OnPointerUpCallback);
 
         // Source must be set after controller
-        _listView.itemsSource = _renderTextures;
+        _listView.itemsSource = _userDances;
     }
 
     private void OnPointerMoveCallback(PointerMoveEvent evt)
@@ -125,3 +99,42 @@ public class GameUI : MonoBehaviour
         _scroller.value = positionY;
     }
 }
+
+
+// This piece of code will be useful at some point, give me some time before removing it.
+// private void Update()
+// {
+//     if (Input.GetKeyDown(KeyCode.T))
+//     {
+//         var container = _listView.Q<VisualElement>("unity-content-container");
+//         var scroller = _listView.Q<Scroller>(classes: Scroller.ussClassName);
+//
+//         // VisualElement visualElement = _listView.contentContainer[0];
+//         // Debug.Log(visualElement);
+//
+//         foreach (var element in container.Children())
+//         {
+//             var pos = element.layout.position;
+//             var hei = _listView.fixedItemHeight;
+//
+//             float screenVisibilityFactor;
+//             if (scroller.value >= pos.y)
+//             {
+//                 var diff = scroller.value - pos.y;
+//                 screenVisibilityFactor = (hei - diff) / hei;
+//             }
+//             else
+//             {
+//                 var diff = (scroller.value + hei) - pos.y;
+//                 screenVisibilityFactor = diff / hei;
+//             }
+//
+//             // if (f > 0.5f)
+//             // {
+//             //     _listView.ScrollTo(element);
+//             //     return;
+//             // }
+//
+//         }
+//     }
+// }

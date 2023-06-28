@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa3945569a94e6684038ddfcd5e8013, type: 3}
+  m_Name: Repository
+  m_EditorClassIdentifier: 
+  _danceModels:
+  - UserName: Player Two
+    UserDanceName: The Grace Jump
+    SongTitle: Makeba
+    SongArtistName: Join
+  - UserName: Player One
+    UserDanceName: The two time shuffle
+    SongTitle: U Can't T.
+    SongArtistName: MC Hammer
+  - UserName: Player Four
+    UserDanceName: The Twist
+    SongTitle: Flowers
+    SongArtistName: Miley Cyrus
+  - UserName: Player Five
+    UserDanceName: The Twist
+    SongTitle: Crank That
+    SongArtistName: Flo Rida
+  - UserName: Player 11
+    UserDanceName: Random moves
+    SongTitle: God's Machete
+    SongArtistName: Dope Lemon
+  - UserName: Player 440
+    UserDanceName: Crazy Frog 2023
+    SongTitle: Axel F
+    SongArtistName: Crazy Frog

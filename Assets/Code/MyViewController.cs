@@ -9,10 +9,12 @@ public class MyViewController : ListViewController
     private readonly VisualTreeAsset _listItemTemplate;
     private readonly CharacterEnvironmentPool _charPool;
     private readonly List<CharacterEnvironment> _charEnvList = new();
+    private readonly List<UserDanceModel> _userDances;
 
-    public MyViewController(VisualTreeAsset template, CharacterEnvironmentPool charPool)
+    public MyViewController(VisualTreeAsset template, CharacterEnvironmentPool charPool, List<UserDanceModel> userDances)
     {
         _charPool = charPool;
+        _userDances = userDances;
         _listItemTemplate = template;
     }
 
@@ -23,21 +25,38 @@ public class MyViewController : ListViewController
 
     protected override void BindItem(VisualElement element, int index)
     {
-        VisualElement visualElement = element.Q<VisualElement>("texture");
+        // Query elements
+        var textureEl = element.Q<VisualElement>("texture");
+        var usernameLabel = element.Q<Label>("user-name");
+        var userDanceNameLabel = element.Q<Label>("user-dance-name");
 
-        var characterEnvironment = _charPool.TakeOne();
-        _charEnvList.Insert(index, characterEnvironment);
+        var songTitle = element.Q<Label>("song-title");
+        var songArtist = element.Q<Label>("song-artist");
 
-        visualElement.userData = index;
-        visualElement.style.backgroundImage = Background.FromRenderTexture(characterEnvironment.RenderTexture);
+        // Populate
+        var dance = _userDances[index];
+        var charEnv = _charPool.TakeOne();
+        _charEnvList.Insert(index, charEnv);
 
-        visualElement.RegisterCallback<PointerDownEvent>(PointerDownCallback);
+        textureEl.style.backgroundImage = Background.FromRenderTexture(charEnv.RenderTexture);
+
+        usernameLabel.text = dance.UserName;
+        userDanceNameLabel.text = dance.UserDanceName;
+
+        songTitle.text = dance.SongTitle;
+        songArtist.text = dance.SongArtistName;
+
+        // Binding info and callback to this element because they are the click target on this current setup
+        textureEl.userData = index;
+        textureEl.RegisterCallback<PointerDownEvent>(PointerDownCallback);
     }
 
     protected override void UnbindItem(VisualElement element, int index)
     {
         _charPool.Store(_charEnvList[index]);
-        element.UnregisterCallback<PointerDownEvent>(PointerDownCallback);
+
+        var textureEl = element.Q<VisualElement>("texture");
+        textureEl.UnregisterCallback<PointerDownEvent>(PointerDownCallback);
     }
 
     private void PointerDownCallback(PointerDownEvent evt)

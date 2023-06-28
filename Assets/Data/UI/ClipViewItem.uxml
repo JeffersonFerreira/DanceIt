@@ -1,14 +1,14 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI/ClipViewItem_Styles.uss?fileID=7433441132597879392&amp;guid=c23d1d0a39e315d4b849a33f57efa5ca&amp;type=3#ClipViewItem_Styles" />
+    <Style src="project://database/Assets/Data/UI/ClipViewItem_Styles.uss?fileID=7433441132597879392&amp;guid=c23d1d0a39e315d4b849a33f57efa5ca&amp;type=3#ClipViewItem_Styles" />
     <ui:VisualElement name="texture" style="flex-grow: 1; background-color: rgb(176, 77, 167); justify-content: center; align-items: stretch; height: 100%; background-image: none; -unity-background-scale-mode: scale-and-crop; position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); padding-left: 12px; padding-right: 12px; padding-top: 12px; padding-bottom: 12px; height: 94px;">
         <ui:Label tabindex="-1" text="Player one" display-tooltip-when-elided="true" name="user-name" style="font-size: 20px;" />
-        <ui:Label tabindex="-1" text="The two time shuffle" display-tooltip-when-elided="true" name="dance-name" />
+        <ui:Label tabindex="-1" text="The two time shuffle" display-tooltip-when-elided="true" name="user-dance-name" />
     </ui:VisualElement>
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: column; align-items: flex-end; justify-content: flex-end; flex-shrink: 0;">
-        <ui:Button display-tooltip-when-elided="true" name="interact-follow" class="account-interaction" style="background-image: url(&apos;project://database/Assets/ICON/12-01.png?fileID=2800000&amp;guid=205608ef2ed9dda4ab67f647dbe8d663&amp;type=3#12-01&apos;);" />
-        <ui:Button display-tooltip-when-elided="true" name="interact-like" class="account-interaction" style="background-image: url(&apos;project://database/Assets/ICON/9-01.png?fileID=2800000&amp;guid=42da2db40431f944a8ff9708300488a6&amp;type=3#9-01&apos;);" />
-        <ui:Button display-tooltip-when-elided="true" name="interact-share" class="account-interaction" style="background-image: url(&apos;project://database/Assets/ICON/45-01.png?fileID=2800000&amp;guid=3a8171ed0b21eb44e91156399c41ed24&amp;type=3#45-01&apos;);" />
+        <ui:Button display-tooltip-when-elided="true" name="interact-follow" class="account-interaction" style="background-image: url(&apos;project://database/Assets/Data/Textures/Icons/12-01.png?fileID=2800000&amp;guid=205608ef2ed9dda4ab67f647dbe8d663&amp;type=3#12-01&apos;);" />
+        <ui:Button display-tooltip-when-elided="true" name="interact-like" class="account-interaction" style="background-image: url(&apos;project://database/Assets/Data/Textures/Icons/9-01.png?fileID=2800000&amp;guid=42da2db40431f944a8ff9708300488a6&amp;type=3#9-01&apos;);" />
+        <ui:Button display-tooltip-when-elided="true" name="interact-share" class="account-interaction" style="background-image: url(&apos;project://database/Assets/Data/Textures/Icons/45-01.png?fileID=2800000&amp;guid=3a8171ed0b21eb44e91156399c41ed24&amp;type=3#45-01&apos;);" />
     </ui:VisualElement>
     <ui:VisualElement picking-mode="Ignore" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; height: 100px; justify-content: space-between; margin-left: 15px; margin-right: 15px; margin-top: 15px; margin-bottom: 15px;">
         <ui:Button text="Dance IT" display-tooltip-when-elided="true" name="interact-danceit" style="flex-grow: 1; margin-left: 0; margin-right: 10px; margin-top: 0; margin-bottom: 0; padding-left: 13px; padding-right: 13px; padding-top: 13px; padding-bottom: 13px; background-color: rgb(77, 87, 183); font-size: 34px; color: rgb(255, 255, 255);" />
@@ -17,7 +17,7 @@
                 <ui:Label tabindex="-1" text="U Can&apos;t T." display-tooltip-when-elided="true" name="song-title" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 5px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
                 <ui:Label tabindex="-1" text="MC Hammer" display-tooltip-when-elided="true" name="song-artist" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
             </ui:VisualElement>
-            <ui:VisualElement name="song-cover-image" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/ICON/98-01.png?fileID=2800000&amp;guid=183f2d5c13434fd4db9511c6164814e6&amp;type=3#98-01&apos;); -unity-background-scale-mode: scale-and-crop;" />
+            <ui:VisualElement name="song-cover-image" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/Data/Textures/Icons/98-01.png?fileID=2800000&amp;guid=183f2d5c13434fd4db9511c6164814e6&amp;type=3#98-01&apos;); -unity-background-scale-mode: scale-and-crop;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

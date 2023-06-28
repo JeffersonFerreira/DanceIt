@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 1328839353}
   - component: {fileID: 1328839355}
   m_Layer: 5
-  m_Name: UIDocument
+  m_Name: Game UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,9 +325,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480db6b41cb27b343b0d0f0da56032db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderTextures:
-  - {fileID: 8400000, guid: 2cfe1b413fd258341aa2ed018df76cde, type: 2}
-  - {fileID: 8400000, guid: 0f596c69a60f62c4ea42a14b2eb8fbd6, type: 2}
-  - {fileID: 8400000, guid: 32bf66d4bc46d894ebeefbc49046586f, type: 2}
-  - {fileID: 8400000, guid: 777749638d1ea4a42b61705f96b5fde6, type: 2}
   _listItemTemplate: {fileID: 9197481963319205126, guid: 0191c0e0d6869644994bb5c07a8d076c, type: 3}
+  _repository: {fileID: 11400000, guid: 01befd787ec3a0a40881ccfdee43ceea, type: 2}
