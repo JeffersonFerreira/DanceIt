@@ -10,7 +10,7 @@ public class MyViewController : ListViewController
     private List<RenderTexture> _renderTextures;
     private VisualTreeAsset _listItemTemplate;
 
-    public MyViewController(List<RenderTexture> renderTextures, VisualTreeAsset template) : base()
+    public MyViewController(List<RenderTexture> renderTextures, VisualTreeAsset template)
     {
         _renderTextures = renderTextures;
         _listItemTemplate = template;
