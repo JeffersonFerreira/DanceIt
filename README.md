@@ -15,3 +15,13 @@ The `Character_Environment` is a simple combination of Camera, RenderTexture, an
 
 ### Future optimizations
 I have not implemented a way to reuse the `ListView.itemSource` space. Meaning that it would grow internally as more data get's fetched. Apart from that, I have made sure to reuse common resources to maintain a stable user experience.
+
+### Assets used
+
+- [Mixamo](https://www.mixamo.com/)
+- [139 Vector Icons](https://assetstore.unity.com/packages/2d/gui/icons/139-vector-icons-69968)
+- [RPG Tiny Hero Duo PBR Polyart](https://assetstore.unity.com/packages/3d/characters/humanoids/rpg-tiny-hero-duo-pbr-polyart-225148)
+- [Unity-Chan! Model](https://assetstore.unity.com/packages/3d/characters/unity-chan-model-18705)
+- [Jammo Character | Mix and Jam](https://assetstore.unity.com/packages/3d/characters/jammo-character-mix-and-jam-158456)
+- [Banana Man](https://assetstore.unity.com/packages/3d/characters/humanoids/banana-man-196830)
+- [Casual 1 - Anime Girl Characters](https://assetstore.unity.com/packages/3d/characters/humanoids/casual-1-anime-girl-characters-185076)
