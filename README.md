@@ -7,6 +7,7 @@ The `ListView` already recycles it's elements to only use the necessary number o
 
 It also allows you to specify a `ListViewController`, containing the methods `BindItem` and `UnbindItem` which are callend whenever you need to repaint a element or hide/disable then.
 This mechanism gets leveraged to dynamically enable/disable a `Character_Environment` in a Object Pooling pattern.
+
 The `Character_Environment` is a simple combination of Camera, RenderTexture, and CharacterSpawnPosition. Used to render the character and display within the UI.
 
 ### Challenges
